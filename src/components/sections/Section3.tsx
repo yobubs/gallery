@@ -1,14 +1,39 @@
-import ImageSlider from "../ImageSlider"
+import { Photos } from "@/models/type"
 import { Button } from "../ui/button"
 import Link from "next/link"
+import ImagesGrid from "../ImagesGrid"
+import Image from "next/image"
 
-export default function Section2() {
+export default function Section3({
+  className,
+  photos,
+}: {
+  className: string
+  photos: Photos
+}) {
   return (
-    <section className="bg-sky-300 h-dvh py-20 flex  items-center justify-center p-3 md:p-8 mt-10">
-      <div className="border h-full w-full flex flex-col gap-14">
-        <div className="flex-1 bg-red-500 h-full w-full">s</div>
+    <section className={className}>
+      <ul className="h-full w-full flex flex-col">
+        <li className="relative flex-1 w-full max-h-[90vh] overflow-hidden">
+          <ImagesGrid columnsCountBreakPoints={[5, 6, 8]}>
+            {photos.map((photo, index) => (
+              <div key={index}>
+                <Image
+                  src={photo.urls.small}
+                  alt={photo.alt_description ?? ""}
+                  width={photo.width}
+                  height={photo.height}
+                  style={{ backgroundColor: photo.color }}
+                  className="w-full rounded"
+                />
+              </div>
+            ))}
+          </ImagesGrid>
 
-        <div className="text-center text-pretty flex flex-col justify-center">
+          <div className="h-1/2 w-full absolute bottom-0 left-0 bg-gradient-to-t from-20% from-background to-white/0" />
+        </li>
+
+        <li className="text-center text-pretty flex flex-col justify-center">
           <h3 className="text-2xl lg:text-5xl font-semibold mb-1">
             Beyond the Horizon
           </h3>
@@ -17,12 +42,12 @@ export default function Section2() {
           </p>
 
           <div className="flex justify-center mt-4">
-            <Link href="/collections">
-              <Button>Go to Collections</Button>
+            <Link href="/gallery">
+              <Button>Go to Gallery</Button>
             </Link>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }

@@ -8,11 +8,11 @@ import Image from "next/image"
 import { Button } from "../ui/button"
 import { SearchDialog } from "../ui/dialog"
 
-export default function Section1() {
+export default function Section1({ className }: { className: string }) {
   return (
-    <section className="md:h-dvh py-20 flex items-center justify-center p-3 md:p-8">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-2">
-        <div className="flex-1 text-center text-pretty md:text-start">
+    <section className={className}>
+      <ul className="flex flex-col md:flex-row items-center justify-center gap-14 md:gap-2">
+        <li className="flex-1 text-center text-pretty md:text-start">
           <h3 className="text-2xl lg:text-5xl font-semibold mb-1">
             Explore Innovative Concepts
           </h3>
@@ -28,9 +28,9 @@ export default function Section1() {
               customTrigger={<Button>Search for Anything</Button>}
             />
           </div>
-        </div>
+        </li>
 
-        <div className="h-full w-full flex-1 flex items-center justify-center">
+        <li className="h-full w-full flex-1 flex items-center justify-center">
           <div className="aspect-[16/8] w-full">
             <ul className="landscape-photos h-full flex gap-1">
               <li className="flex-1 h-full flex flex-col gap-1">
@@ -43,6 +43,7 @@ export default function Section1() {
                     src={Landscape2}
                     alt="landscape"
                     fill
+                    sizes="(min-width: 1360px) 201px, (min-width: 780px) calc(14.11vw + 12px), calc(33.26vw - 8px)"
                     className="object-cover rounded-md"
                   />
                 </div>
@@ -55,6 +56,7 @@ export default function Section1() {
                       src={Landscape1}
                       alt="landscape"
                       fill
+                      sizes="(min-width: 1360px) 399px, (min-width: 780px) calc(28.39vw + 19px), calc(66.74vw - 20px)"
                       className="object-cover rounded-md"
                     />
                   </li>
@@ -63,6 +65,7 @@ export default function Section1() {
                       src={Landscape3}
                       alt="landscape"
                       fill
+                      sizes="(min-width: 1360px) 201px, (min-width: 780px) calc(14.11vw + 12px), calc(33.26vw - 8px)"
                       className="object-cover rounded-md"
                     />
                   </li>
@@ -71,6 +74,7 @@ export default function Section1() {
                       src={Landscape4}
                       alt="landscape"
                       fill
+                      sizes="(min-width: 1360px) 201px, (min-width: 780px) calc(14.11vw + 12px), calc(33.26vw - 8px)"
                       className="object-cover rounded-md"
                     />
                   </li>
@@ -78,8 +82,8 @@ export default function Section1() {
               </li>
             </ul>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }

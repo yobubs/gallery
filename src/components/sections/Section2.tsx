@@ -8,7 +8,7 @@ import ImageSlider from "../ImageSlider"
 import { Button } from "../ui/button"
 import Link from "next/link"
 
-export default function Section2() {
+export default function Section2({ className }: { className: string }) {
   const images = [
     {
       title: "People",
@@ -36,10 +36,11 @@ export default function Section2() {
     },
   ]
   return (
-    <section className="md:h-dvh py-20 flex items-center justify-center p-3 md:p-8 mt-10">
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+    <section className={className}>
+      <ul className="w-full flex flex-col-reverse md:grid md:grid-cols-2 gap-14">
         <ImageSlider images={images} />
-        <div className="text-center text-pretty md:text-start flex flex-col  justify-center">
+
+        <li className="text-center text-pretty md:text-start flex flex-col  justify-center">
           <h3 className="text-2xl lg:text-5xl font-semibold mb-1">
             Bookmark Your Inspirations
           </h3>
@@ -54,8 +55,8 @@ export default function Section2() {
               <Button>Go to Collections</Button>
             </Link>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </section>
   )
 }

@@ -18,7 +18,10 @@ const config = {
       },
     },
     extend: {
-      height: { calcHeight: "calc(100dvh - 3.5rem)" },
+      height: {
+        calcHeight: "calc(100dvh - 3.5rem)",
+        calcHeightWithSeach: "calc(100dvh - 3.5rem - 54px)",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

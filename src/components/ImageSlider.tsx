@@ -11,7 +11,7 @@ export default function ImageSlider({
   images: { title: string; src: StaticImageData }[]
 }) {
   return (
-    <div className="w-full px-2">
+    <li className="w-full px-2">
       <Swiper
         modules={[EffectCoverflow]}
         effect="coverflow"
@@ -34,6 +34,7 @@ export default function ImageSlider({
                 src={image.src}
                 alt={image.title}
                 fill
+                sizes="(min-width: 780px) 192px, 160px"
                 className="object-cover"
               />
             </div>
@@ -45,6 +46,6 @@ export default function ImageSlider({
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </li>
   )
 }
