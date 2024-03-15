@@ -13,16 +13,74 @@ import {
   FetchUserAssets,
 } from "@/lib/Unsplash"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 
-function PhotosReturnFunction({
-  photos,
-  noMorePhotos,
-  reference,
+export function LoadMorePhotos({
+  basePhotos,
+  order_by,
+  userName,
+  collectionId,
+  userAssets,
+  searchQuery,
+  orientation,
 }: {
-  photos: Photos
-  noMorePhotos: boolean
-  reference: (node?: Element | null | undefined) => void
+  basePhotos: Photos
+  order_by?: string
+  collectionId?: string
+  userName?: string
+  userAssets?: "photos" | "likes"
+  searchQuery?: string
+  orientation?: string
 }) {
+  const searchParams = useSearchParams()
+
+  const { ref, inView } = useInView()
+  const [photos, setPhotos] = useState(basePhotos)
+  const [page, setPage] = useState(2)
+  const [noMorePhotos, setNoMorePhotos] = useState(false)
+
+  const fetchMoreCallback = useCallback(async () => {
+    const newPhotos =
+      searchQuery != undefined
+        ? await FetchSearch("photos", searchQuery, page, orientation).then(
+            (searchResults) => searchResults.results
+          )
+        : collectionId != undefined
+        ? await FetchCollectionPhotos(collectionId, page)
+        : userName != undefined
+        ? await FetchUserAssets(
+            userName,
+            userAssets !== undefined ? userAssets : "photos",
+            page
+          )
+        : await FetchPhotos(page, order_by ?? "latest")
+    if (newPhotos?.length < 1 || !newPhotos) {
+      setNoMorePhotos(true)
+      return
+    }
+    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos])
+    setPage(page + 1)
+  }, [
+    order_by,
+    orientation,
+    searchQuery,
+    collectionId,
+    userName,
+    userAssets,
+    page,
+    setNoMorePhotos,
+    setPhotos,
+    setPage,
+  ])
+
+  useEffect(() => {
+    setPhotos(basePhotos)
+  }, [searchParams, basePhotos])
+
+  useEffect(() => {
+    if (inView) fetchMoreCallback()
+  }, [inView, fetchMoreCallback])
+
   return (
     <>
       <ImagesGrid>
@@ -50,7 +108,7 @@ function PhotosReturnFunction({
         </div>
       ) : (
         <div
-          ref={reference}
+          ref={ref}
           className="mt-5 flex gap-2 py-5 items-center justify-center text-muted-foreground text-md md:text-lg"
         >
           <p>loading photos</p>
@@ -58,68 +116,5 @@ function PhotosReturnFunction({
         </div>
       )}
     </>
-  )
-}
-
-export function LoadMorePhotos({
-  basePhotos,
-  userName,
-  collectionId,
-  userAssets,
-  searchQuery,
-}: {
-  basePhotos: Photos
-  collectionId?: string
-  userName?: string
-  userAssets?: "photos" | "likes"
-  searchQuery?: string
-}) {
-  const { ref, inView } = useInView()
-  const [photos, setPhotos] = useState(basePhotos)
-  const [page, setPage] = useState(2)
-  const [noMorePhotos, setNoMorePhotos] = useState(false)
-
-  const fetchMoreCallback = useCallback(async () => {
-    const newPhotos =
-      searchQuery != undefined
-        ? await FetchSearch("photos", searchQuery, page).then(
-            (searchResults) => searchResults.results
-          )
-        : collectionId != undefined
-        ? await FetchCollectionPhotos(collectionId, page)
-        : userName != undefined
-        ? await FetchUserAssets(
-            userName,
-            userAssets !== undefined ? userAssets : "photos",
-            page
-          )
-        : await FetchPhotos(page)
-    if (newPhotos?.length < 1 || !newPhotos) {
-      setNoMorePhotos(true)
-      return
-    }
-    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos])
-    setPage(page + 1)
-  }, [
-    searchQuery,
-    collectionId,
-    userName,
-    userAssets,
-    page,
-    setNoMorePhotos,
-    setPhotos,
-    setPage,
-  ])
-
-  useEffect(() => {
-    if (inView) fetchMoreCallback()
-  }, [inView, fetchMoreCallback])
-
-  return (
-    <PhotosReturnFunction
-      photos={photos}
-      noMorePhotos={noMorePhotos}
-      reference={ref}
-    />
   )
 }

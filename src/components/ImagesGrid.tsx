@@ -7,7 +7,6 @@ export default function ImagesGrid({
   columnsCountBreakPoints,
 }: {
   children: React.ReactNode
-
   columnsCountBreakPoints?: number[]
 }) {
   return (

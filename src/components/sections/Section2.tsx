@@ -13,26 +13,31 @@ export default function Section2({ className }: { className: string }) {
     {
       title: "People",
       src: SwiperPeople,
+      delay: 0,
     },
 
     {
       title: "Furnitures",
       src: SwiperFurnitures,
+      delay: 0.4,
     },
 
     {
       title: "Places",
       src: SwiperPlaces,
+      delay: 0.8,
     },
 
     {
       title: "Animal",
       src: SwiperAnimals,
+      delay: 0.8,
     },
 
     {
       title: "Foods",
       src: SwiperFoods,
+      delay: 0.4,
     },
   ]
   return (

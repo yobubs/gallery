@@ -107,7 +107,7 @@ export default function RelatedCollection({
                   key={index}
                   href={`/s/${collection_tag.title.replace(/\s/g, "-")}`}
                 >
-                  <li className="text-sm rounded-lg bg-accent px-3 py-2">
+                  <li className="text-xs md:text-sm rounded-lg bg-accent px-3 py-2">
                     {collection_tag.title}
                   </li>
                 </a>

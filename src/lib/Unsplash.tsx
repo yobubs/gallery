@@ -23,8 +23,10 @@ async function unsplashFetch(url: string) {
   return response.json()
 }
 
-export async function FetchPhotos(page: number) {
-  const url = `https://api.unsplash.com/photos?page=${page}&per_page=40`
+export async function FetchPhotos(page: number, order_by?: string) {
+  const url = `https://api.unsplash.com/photos?page=${page}&per_page=40${
+    order_by !== undefined ? `&order_by=${order_by}` : ""
+  }`
   const photos: Photos = await unsplashFetch(url)
   return photos
 }
@@ -99,9 +101,16 @@ export async function FetchUserAssets(
   return userAssets
 }
 
-export async function FetchSearch(type: string, query: string, page: number) {
+export async function FetchSearch(
+  type: string,
+  query: string,
+  page: number,
+  orientation?: string
+) {
   const search = await unsplashFetch(
-    `https://api.unsplash.com/search/${type}?query=${query}&page=${page}&per_page=24`
+    `https://api.unsplash.com/search/${type}?query=${query}&page=${page}&per_page=24${
+      orientation !== undefined ? `&orientation=${orientation}` : ""
+    }`
   )
 
   return search

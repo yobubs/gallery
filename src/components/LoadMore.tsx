@@ -13,6 +13,7 @@ type Props = {
   loadingMsg: string
   userName?: string
   searchQuery?: string
+  baseData?: Promise<JSX.Element | null>
 }
 
 export default function LoadMore({ loadingMsg, userName, searchQuery }: Props) {

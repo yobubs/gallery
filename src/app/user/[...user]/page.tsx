@@ -46,15 +46,9 @@ export default async function UserDetailsPage({
 
   if (!user)
     return (
-      <main className="h-[calc(100dvh-3.5rem)] flex flex-col gap-2 items-center justify-center">
+      <div className="h-calcHeightWithSeach flex flex-col gap-2 items-center justify-center">
         <h1 className="text-2xl ">No User Found</h1>
-        <Link href={"/gallery"}>
-          <Button>
-            <ChevronLeft size={20} />
-            Gallery
-          </Button>
-        </Link>
-      </main>
+      </div>
     )
   return (
     <>
@@ -139,14 +133,16 @@ export default async function UserDetailsPage({
 
         <ul className="grid grid-cols-2 text-center mt-10">
           <li className="border-r px-2 mr-2">
-            <h3 className="mb-1 text-sm text-muted-foreground">total photos</h3>
-            <p className="text-xl md:text-2xl"> {user.total_photos}</p>
+            <h3 className="mb-1 text-sm md:text-base text-muted-foreground">
+              total photos
+            </h3>
+            <p className="md:text-2xl"> {user.total_photos}</p>
           </li>
           <li className="px-2">
-            <h3 className="mb-1 text-sm text-muted-foreground">
+            <h3 className="mb-1 text-sm md:text-base text-muted-foreground">
               total promoted photos
             </h3>
-            <p className="text-xl md:text-2xl">{user.total_promoted_photos}</p>
+            <p className="md:text-2xl">{user.total_promoted_photos}</p>
           </li>
         </ul>
       </div>
@@ -168,7 +164,7 @@ export default async function UserDetailsPage({
                   }
                   className="gap-2"
                 >
-                  <p className="text-xs md:text-bse">{asset.title}</p>
+                  <p className="text-xs md:text-base">{asset.title}</p>
                   <span className="text-xs md:text-base text-muted-foreground ">
                     {asset.total}
                   </span>

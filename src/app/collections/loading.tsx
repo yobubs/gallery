@@ -3,8 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 export default function CollectionsLoading() {
   return (
     <main>
-      <Skeleton className="h-12 w-full mb-3" />
-      <ul className="collection-loading grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <ul className="collections-loading grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {Array(12)
           .fill("")
           .map((_, i) => (

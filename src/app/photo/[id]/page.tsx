@@ -69,7 +69,7 @@ export default async function PhotoDetails({
         {photo.tags.map((tag, index) => (
           <li key={index}>
             <Link key={index} href={`/s/${tag.title.replace(/\s/g, "-")}`}>
-              <p className="rounded-lg bg-accent px-3 py-2">{tag.title}</p>
+              <p className="text-sm md:text-base rounded-lg bg-accent px-3 py-2">{tag.title}</p>
             </Link>
           </li>
         ))}

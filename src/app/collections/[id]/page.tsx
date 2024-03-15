@@ -57,7 +57,7 @@ export default async function CollectionDetailsPage({
         </li>
       </ul>
 
-      <h5 className="mt-16 text-center mb-2 text-muted-foreground">
+      <h5 className="mt-16 text-center mb-2 text-muted-foreground text-sm md:text-base">
         {collection.total_photos} PHOTOS
       </h5>
     </>
