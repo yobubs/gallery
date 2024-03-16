@@ -75,7 +75,7 @@ export function LoadMorePhotos({
 
   useEffect(() => {
     setPhotos(basePhotos)
-  }, [searchParams, basePhotos])
+  }, [basePhotos])
 
   useEffect(() => {
     if (inView) fetchMoreCallback()
